@@ -1,0 +1,64 @@
+
+.userinfo{background-color:#00aaaa;color:white; padding:4 1 2 1}
+.title{background-color:#008888;color:white;margin:0 0 10 0; padding:4 1 2 1}
+.lou1{background-color:#cccccc;color:black;margin:5 10 10 5}
+.reply{border-style: solid;border-width:1px; border-color:#00aaaa;color:black;margin:5 10 10 5}
+
+.pendingtitle{background-color:#ff5555;color:white;margin:0 0 10 0; padding:4 1 2 1}
+
+.faq{border-style: solid;border-width:1px; border-color:#00aaaa;margin:0 10 10 5}
+.question{background-color:#dddddd;color:black;  margin:2 2 2 4; padding:1 1 1 1}
+.solution{background-color:#7777dd;color:#ffffff;margin:2 2 2 4; padding:1 1 1 1}
+
+.topicheader{background-color:#00aaaa; color:#ffffff; margin:5 0 5 0;height:32px }
+.topicitem{background-color:#eeeeee;color:black;margin:5 0 5 0;height:32px }
+.topicitem>td{margin:0 5 0 5;}
+.topicdate{color:blue;font-size:60%}
+.topicauthor{font-size:80%}
+
+.username{color:#222221;}
+.newtopic{border-style: solid;border-width:1px; border-color:#00aaaa;background-color:#eeeeee;color:blue;margin:0 0 5 0; padding: 5 5 5 5  }
+.plus{font-family:"Times New Roman",Georgia,Serif;font-size:200%}
+
+#newreplydiv{float:bottom;margin: 0}
+.newreplydiv{margin: 0;background-color:#dddddd;color:black;margin:5 10 10 5}
+xmp.bbscode {
+    word-break:break-all;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin:10 0
+}
+
+.wrong{border-color:#ff0000;border-width:1px}
+.correct{border-color:green;border-width:1px}
+.verifydiv{background-color:#dddddd;color:black;margin:5 10 10 0; width:200px}
+.vquestion{background-color:#000000;color:white; width:100%}
+#reviewDiv{ margin:0px 0px; padding:0px}
+#replybody{width:100%}
+#vcode{width:85%;margin:0px}
+.vcode{width:100%}
+#vprompt2{color:red}
+.review{width:100%}
+dl.bbs {
+    margin:2px 0px;
+    background:#5f9be3;
+}
+
+dl.bbs dt {
+    background:#5f9be3;
+    color:#fff;
+}
+
+dl.bbs dd {
+    margin:0px 10px; 
+}
+
+.emptyMargin{margin:0px;padding:0px}
+iframe{
+    border:none;overflow:hidden;
+}
+
+a:link { text-decoration: none;color: blue}
+a:active { text-decoration:blink}
+a:hover { text-decoration:underline;color: red}
+a:visited { text-decoration: none;color: green} 

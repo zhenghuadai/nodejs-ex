@@ -2,6 +2,10 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
+var fs = require('fs');
+//var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+var marked = require('marked');
     
 Object.assign=require('object-assign')
 
@@ -56,7 +60,7 @@ var initDb = function(callback) {
   });
 };
 
-app.get('/', function (req, res) {
+app.get('/openshift', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -98,6 +102,60 @@ app.use(function(err, req, res, next){
 initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
+
+function InitUEFIvhost(vhost)
+{
+    var public_path = __dirname + "/public";
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false
+    });
+
+    vhost.engine('md', function(path, options, fn){
+        fs.readFile(path, 'utf8', function(err, str){
+            if (err) return fn(err);
+            try {
+                var markedhtml = marked(str);
+                var html = '<html><head> <LINK REL="stylesheet" TYPE="text/css" HREF="/css/md.css"> ' +
+                           ' <SCRIPT SRC="/js/md.js" type="text/javascript"></script>'+
+                           '</head><body>' + markedhtml + "</body></html>";
+                fn(null, html);
+            } catch(err) {
+                fn(err);
+            }
+        });
+    });
+
+    vhost.set('views', public_path);
+    vhost.set('view engine', 'md');
+
+    vhost.get('/', function (req, res) {
+        res.redirect("/index.html");
+    });
+
+
+    //vhost.use(require('express-markdown')({
+    //    directory: __dirname + '/public'
+    //}));
+
+    vhost.get("/*.md", function(req, res,next){
+        var param = req.params[0];
+        res.render("" + param);
+    });
+
+    vhost.use(express.static(public_path));
+
+
+    //test.init(vhost);
+}
+
+InitUEFIvhost(app);
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);

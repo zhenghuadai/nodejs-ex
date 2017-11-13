@@ -1,0 +1,10 @@
+{
+"menu":[ 
+{
+    "title":"深入UEFI内核",
+    "items":["第一条指令"], 
+    "targets":[{"src":"/blog/uefi_reset_vector.md", "tid":10001}]
+}
+
+]
+}

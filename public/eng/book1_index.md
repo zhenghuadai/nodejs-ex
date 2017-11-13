@@ -1,0 +1,222 @@
+
+UEFI Principles and Programming
+
+- Preface 
+- Chapter 1 UEFI Introduction 1
+- 1.1　From BIOS to UEFI 1
+- 1.1.1　What is the bios 1
+- 1.1.2　Weaknesses of BIOS 2
+- 1.2　Waht is UEFI  2
+- 1.2.1　UEFI orgnization 3
+- 1.2.2　Strengths of  UEFI  4
+- 1.2.3　Boot Procedure of UEFI System 5
+- 1.3　Summary 12
+
+- Chapter 2　UEFI developing tools 14
+- 2.1　Windows 14
+- 2.1.1　Install building tools 15
+- 2.1.2　Configure EDK2 15
+- 2.1.3　Build UEFI emualtor and UEFI project 17
+- 2.1.4　run UEFI emualator 19
+- 2.2　Linux 21
+- 2.2.1　Install building tools 22
+- 2.2.2　Configure EDK2 22
+- 2.2.3　Build UEFI emualtor and UEFI project 23
+- 2.2.4　run UEFI emualator 24
+- 2.3　Build OVMF and run 25
+- 2.4　DUET 27
+- 2.5　Summary 28
+
+- Chapter 3  UEFI Project Module 29
+- 3.1　Standard Application Module 30
+- 3.1.1　Entry Function 30
+- 3.1.2　Module File 31
+- 3.1.3　Build and Run 37
+- 3.1.4　Load Procedure of Standard Application 37
+- 3.2　Other types of Modules 43
+- 3.2.1　Shell Application Module 43
+- 3.2.2　main function Application Module 46
+- 3.2.3　Library Module 47
+- 3.2.4　UEFI Driver Module 49
+- 3.2.5　Module Summary 50
+- 3.3　Package and .dsc, .dec, .fdf File 51
+- 3.3.1　.dsc File 51
+- 3.3.2　.dec File 56
+- 3.4　Dubug UEFI  59
+- 3.5　Summary 61
+
+- Chapter 4　UEFI Protocol  62
+- 4.1　Data Structure of Protocol 64
+- 4.2　Protocol Service  65
+- 4.2.1　OpenProtocol 66
+- 4.2.2　HandleProtocol 67
+- 4.2.3　LocateProtocol  69
+- 4.2.4　LocateHandleBuffer 69
+- 4.2.5　Other Service for Protocol 71
+- 4.2.6　CloseProtocol72
+- 4.3　Example 73
+- 4.4　Summary 75
+
+- Chapter 5　UEFI Service 76
+- 5.1　System Table 76
+- 5.1.1　System Table Structure 77
+- 5.1.2　How to use System Table 79
+- 5.2　Boot Service 82
+- 5.2.1　Structure 82
+- 5.2.2　Life Circle 91
+- 5.3　Runtime Service 93
+- 5.4　Summary 102
+
+- Chapter 6 Event 103
+- 6.1　Service for Event 104
+- 6.1.1　WaitForEvent  105
+- 6.1.2　CreateEvent  106
+- 6.1.3　CreateEventEx  110
+- 6.1.4　Others 112
+- 6.2　Timer Event 113
+- 6.3　Task Priority 114
+- 6.3.1　Raise and Restore Task Priority Level 115
+- 6.3.2　UEFI Time Interrupt 116
+- 6.3.3　UEFI Notification 126
+- 6.4　Example on Keyboard and Mouse 127
+- 6.5　Summary  128
+
+- Chapter 7 Disk and File System 129
+- 7.1　GPT Hard Disk 129
+- 7.1.1　Legacy MBR Disk 129
+- 7.1.2　GPT Disk Structure 130
+- 7.2　Device Path 134
+- 7.3　Protocol for Disk  139
+- 7.3.1　BlockIo  140
+- 7.3.2　BlockIo2  142
+- 7.3.3　DiskIo  146
+- 7.3.4　DiskIo2  147
+- 7.3.5　PassThrough  150
+- 7.4　File System 152
+- 7.5　File Operations 153
+- 7.5.1　Open 154
+- 7.5.2　Read 156
+- 7.5.3　Write 159
+- 7.5.4　Close   160
+- 7.5.5　Others 160
+- 7.5.6　Aysnc File Operations 162
+- 7.5.7　File Operations in EFI_SHELL_PROTOCOL 166
+- 7.6　Summary 170
+
+- Chapter 8 Develop on UEFI Service 171
+- 8.1　How to Design a Protocol(as a Service) 172
+- 8.2　How to Implement a Protocol(as a Service) 174
+- 8.3　Framework for a Protocol(as a Service) 178
+- 8.4　ffmpeg in UEFI 179
+- 8.4.1　libavcodec 181
+- 8.4.2　Other libraries 182
+- 8.4.3　StdLib in Drivers  186
+- 8.5　How to use a Protocol 188
+- 8.6　Summary 190
+
+- Chapter 9 UEFI Driver 191
+- 9.1　UEFI Drivel Modal 192
+- 9.1.1　EFI Driver Binding Protocol 192
+- 9.1.2　EFI Component Name Protocol 196
+- 9.2　Guid to Write a Driver 197
+- 9.3　PCI Driver 199
+- 9.4　AC97 and Controller 202
+- 9.5　AC97 Driver 206
+- 9.5.1　AC97 Functional Protocol EFI_AUDIO_PROTOCOL  206
+- 9.5.2　AC97 EFI Driver Binding Protocol 213
+- 9.5.3　AC97 Experiment 220
+- 9.6　Summary 221
+
+- Chapter 10 Develop UEFI with C++ 222
+- 10.1　Difference between C and C++  222
+- 10.2　How to Support C++  224
+- 10.2.1　Support C++ Basic Feature 224
+- 10.2.2　Program life Cirelce in Windows 226
+- 10.2.3　How to Support C++ Global Constructor and Destructor in Windows 229
+- 10.2.4　Program life Cirelce in Linux 231
+- 10.2.5　How to Support C++ Global Constructor and Destructor in Linux 240
+- 10.2.6　new and delete  242
+- 10.2.7　STL  243
+- 10.3　GcppPkg 243
+- 10.4　Test on GcppPkg  246
+- 10.5　Summary 248
+
+- Chapter 11 GUI 249
+- 11.1　String 249
+- 11.1.1　Functions for String 249
+- 11.1.2　String Resource in EDK2 251
+- 11.1.3　Manage String Resource 255
+- 11.2　Manage Multiple Language 260
+- 11.3　Package List 262
+- 11.4　Gaphics Display 263
+- 11.4.1　Display Mode  264
+- 11.4.2　Block Transfer（Blt）267
+- 11.4.3　Display String in Gaphics Mode 269
+- 11.5　SimpleFont and UTF-16 Chacters 272
+- 11.5.1　 SimpleFont Format 273
+- 11.5.2　Create Font Package 275
+- 11.5.3　Register Font Package to UEFI System 276
+- 11.6　SimpleFont Package Program 277
+- 11.7　Font  278
+- 11.7.1　Font Format 279
+- 11.7.2　Font Pakcage 279
+- 11.7.3　Font and SimpleFont  281
+- 11.8　Summary 284
+
+- Chapter 12 GUI Application 285
+- 12.1　UEFI Event Handler 285
+- 12.1.1　Keyboard Event 285
+- 12.1.2　Mouse Event 292
+- 12.1.3　Timer Event 293
+- 12.1.4　Service for UI Event 294
+- 12.2　Event Handler Framework 297
+- 12.3　Draw Mouse and UI Staff 302
+- 12.3.1　Mouse 303
+- 12.3.2　UI Staff 305
+- 12.4　GUIPkg  306
+- 12.5　Video Player 309
+- 12.6　Summary 315
+
+- Chapter 13　Multi-task 317
+- 13.1　Multi-processor Service 317
+- 13.1.1　EFI_MP_SERVICES_PROTOCOL 317
+- 13.1.2　AP Boot Procedure 324
+- 13.2　Inline Assembly and Register Context 333
+- 13.2.1　Inline Assembly 333
+- 13.2.2　 Register Context 335
+- 13.3　Thread 336
+- 13.3.1　Create a Thread 337
+- 13.3.2　Skedule Threads 340
+- 13.3.3　Join a Thread 341
+- 13.3.4　SimpleThread 341
+- 13.4　Summary 345
+
+- Chapter 14　Network 346
+- 14.1　Network Stack in UEFI 348
+- 14.2　EFI_TCP4_PROTOCOL  350
+- 14.2.1　Create a Socket  352
+- 14.2.2　Connect  356
+- 14.2.3　Send/Recv Data 358
+- 14.2.4　Close a Socket  361
+- 14.2.5　Test the Socket  362
+- 14.3　Summary 363
+
+- Chapter 15　C StdLib  364
+- 15.1　Why to use StdLib 364
+- 15.2　Simple Way to use Std functions  365
+- 15.2.1　sstdPkg  366
+- 15.2.2　Test on sstdPkg  368
+- 15.3　StdLib in EDK2 369
+- 15.3.1　main Application 369
+- 15.3.2　non-main Application 374
+- 15.4　Summary 376
+
+- Chapter 16　Shell and Shell Command  377
+- 16.1　Build and Run Shell 377
+- 16.2　Shell Service  379
+- 16.3　Shell Script  385
+- 16.3.1　Shell Script Syntax 385
+- 16.3.2　Auto-start an Application 388
+- 16.4　Embedded Shell Command 388
+- 16.5　Summary 394
+

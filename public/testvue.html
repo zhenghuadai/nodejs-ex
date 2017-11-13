@@ -1,0 +1,50 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE> testvue.html </TITLE>
+<META NAME="Generator" CONTENT="vim">
+<META NAME="Author" CONTENT="Zhenghua Dai">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<script language="javascript" src="./js/particle.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="/js/vue.min.js"></script>
+<LINK REL="stylesheet" TYPE="text/css" HREF="/js/style.css">
+</HEAD>
+<BODY>
+<div id="demo">
+    <h1>{{title | uppercase}}</h1>
+    <ul>
+        <li
+        v-repeat="todos"
+        v-on="click: done = !done"
+        class="{{done ? 'done' : ''}}"
+        >
+        {{content}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+var demo = new Vue({
+    el: '#demo',
+    data: {
+        title: 'todos',
+        todos: [
+            {
+                done: true,
+                content: 'Learn JavaScript'
+            },
+            {
+                done: false,
+                content: 'Learn vue.js'
+            }
+        ]
+    }
+})
+</script>
+</BODY>
+</HTML>

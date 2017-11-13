@@ -1,0 +1,81 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE> marked.test.html </TITLE>
+<META NAME="Generator" CONTENT="vim">
+<META NAME="Author" CONTENT="Zhenghua Dai">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+        <LINK REL="stylesheet" TYPE="text/css" HREF="/js/style.css">
+        <LINK REL="stylesheet" TYPE="text/css" HREF="/css/bbs.css">
+        <LINK REL="stylesheet" TYPE="text/css" HREF="/css/common.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="/js/marked.js"></script>
+<script src="/js/resume.js"></script>
+<LINK REL="stylesheet" TYPE="text/css" HREF="/js/style.css">
+</HEAD>
+<BODY style="width:100%">
+<div id=thewebheader>
+    <div id="do" class="button navigation"> convert</div>
+    <div id="htmlview" class="navigation button right">view source</div>
+</div>
+<div style="clear: left"></div>
+<div class="fleft" style="height:100%;width:50%">
+    <textarea id="editor" style="width:96%;height:100%;margin:0px 20px 0px 20px;border-left:0;border-bottom:0;"></textarea>
+</div>
+<div class="fleft" style="width:50%">
+    <iframe class="" id="display" style="width:100%;height:100%;padding:2px 20px"></iframe>
+    <xmp class="" id="displayhtml" style="width:100%;display:none;padding:2px 20px"></xmp>
+</div>
+<script type="text/javascript">
+function foldable(){
+    $(".hdiv").find(">:first-child").prepend("<span style='float:left;width:20;display:none'>+</span><span style='float:left;width:20'>-</span>");
+ $(".hdiv").find(">:first-child").click(function(){
+     var that = $(this);
+     that.next().toggle();
+     that.find("span").toggle();
+ });
+};
+var render = new marked.Renderer();
+render.oldHeading = render.heading;
+var lastLevel = -1;
+render.heading = function (text, level, raw) {
+    var h = render.oldHeading(text, level, raw);
+    var rdiv = "";
+    if(lastLevel != -1){
+        for(var i = lastLevel; i >= level; i--)
+            rdiv += "</div></div>" ;
+    }
+    lastLevel = level;
+    return rdiv + "<div class='hdiv'> "+ h + "<div class='hvalue'>";
+}
+
+function markedit(str){
+    var markedhtml = marked(str, {'renderer':render, headerPrefix:'h-'});
+    return markedhtml;
+}
+
+$(function(){
+        $("#do").click(function(){
+            var texta = $("#editor");
+            var str = $("#editor").val();
+            var html = markedit(str);
+            //$("#display").html(html);
+            $('#display').contents().find('body').html(html);
+            $("#displayhtml").text(html);
+            foldable();
+            });
+        });
+
+$("#htmlview").click(function(){
+        $("#display").toggle();
+        $("#displayhtml").toggle();
+        });
+
+</script>
+</BODY>
+</HTML>
