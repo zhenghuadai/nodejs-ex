@@ -2,10 +2,17 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
+var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);
+var sessionInstance;
+var uefiws = require('./src/uefiws');
+var bodyParser = require('body-parser');
 var fs = require('fs');
 //var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 var marked = require('marked');
+var os = require('os');
+var http = require('http');
     
 Object.assign=require('object-assign')
 
@@ -103,6 +110,92 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
+function createvhost(domainName)
+{
+    //var vhost = express();
+    var vhost = app;
+    //parses request body and populates request.body
+    //vhost.use( express.bodyParser() );
+    //checks request.body for HTTP method overrides
+    //vhost.use( express.methodOverride() );
+    //Show errors
+    //vhost.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
+    
+    // parse application/json
+    vhost.use(bodyParser.json());                        
+
+    // parse vhostlication/x-www-form-urlencoded
+    vhost.use(bodyParser.urlencoded({ extended: true }));
+//    vhost.use(function(request, response, next) {
+//          console.log("In comes a " + request.method + " to " + request.url);
+//          next();
+//    });
+
+    if(process.env.NODE_SESSION === "redis"){
+        var RedisStore = require('connect-redis')(session);
+        var redis = require("redis").createClient();
+        sessionInstance = session({
+            secret: 'Iabk() *&cat',
+
+            store: new RedisStore({
+                host: 'localhost',
+            port: 6379,
+            db: 2,
+            pass: 'b&()*Fjl12<>AKJ;kjs#$a',
+            client:redis
+            }),
+
+            cookie: { maxAge: 24*3600*1000 }
+        });
+
+    }else{
+        var hostname = os.hostname();
+        var mongohost = 'localhost';
+        var mongouser = '';
+        var mongopwd = '';
+        var mongourl = 'mongodb://' +  mongohost + ':27017/bios';
+        //if(hostname  === "ex-std-node614.prod.rhcloud.com"){
+        if(hostname.indexOf("openshiftapps.com") > 0){
+            //mongohost = process.env.OPENSHIFT_MONGODB_DB_HOST;
+            //mongouser = 'admin';
+            //mongopwd = 'l24nsSS6eFig';
+            //mongourl = 'mongodb://' + mongouser + ':' + mongopwd + '@' + mongohost + ':27017/bios';
+            mongouser = mongoUser; 
+            mongohost = mongoHost; 
+            mongopwd = mongoPassword ;
+            mongourl = mongoURL; 
+
+        }else{
+            mongourl = 'mongodb://' +  mongohost + ':27017/bios';
+        }
+        sessionInstance = session({
+            //genid: function(req) {
+            //  return genuuid() // use UUIDs for session IDs
+            //},
+            secret: 'Iabk() *&cat',
+            resave: false,
+
+            store: new MongoStore({
+                //        url: 'mongodb://root:myPassword@mongo.onmodulus.net:27017/3xam9l3'
+                db: 'bios',
+            host: mongohost,
+            username: mongouser,
+            password: mongopwd, 
+            collection: 'session', 
+            url: mongourl,
+            auto_reconnect:true
+            }),
+
+            cookie: { maxAge: 24*3600*1000 }
+        });
+    }
+
+    vhost.use(sessionInstance);
+
+    return vhost ;// VirtualHost(domainName, vhost)
+}
+
+
 function InitUEFIvhost(vhost)
 {
     var public_path = __dirname + "/public";
@@ -155,9 +248,12 @@ function InitUEFIvhost(vhost)
     //test.init(vhost);
 }
 
+var server = http.createServer(app);
+createvhost(app);
+uefiws.init(server, sessionInstance);
 InitUEFIvhost(app);
 
-app.listen(port, ip);
+server.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;

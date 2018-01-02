@@ -10,9 +10,15 @@
     "express": "^4.13.4",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.16",
+    "connect-mongo": "1.3.2",
     "morgan": "^1.7.0",
     "express-markdown": "*",
+    "body-parser": "1.8",
     "marked": "~0.3.5",
+    "express-socket.io-session":"*",
+    "socket.io": "~1.7.1",
+    "express-session": "*",
+    "ws": "~1.1.1",
     "object-assign":"4.1.0"
   },
   "engine": {
